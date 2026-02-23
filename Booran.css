@@ -1,0 +1,2442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MXDealerAdvantage × Booran Motors</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mx-purple: #7C3AED;
+  --mx-purple-dark: #6D28D9;
+  --mx-purple-deeper: #5B21B6;
+  --mx-purple-glow: rgba(124, 58, 237, 0.3);
+  --mx-pink: #EC4899;
+  --mx-pink-glow: rgba(236, 72, 153, 0.2);
+  --mx-teal: #14B8A6;
+  --mx-teal-glow: rgba(20, 184, 166, 0.15);
+  --mx-gold: #FBBF24;
+  --mx-bg-primary: #111118;
+  --mx-bg-card: #191922;
+  --mx-bg-card-hover: #21212E;
+  --mx-bg-elevated: #1D1D28;
+  --mx-text-primary: #F0F0F5;
+  --mx-text-secondary: #9CA3AF;
+  --mx-text-muted: #6B7280;
+  --mx-border: rgba(124, 58, 237, 0.15);
+  --mx-border-subtle: rgba(255, 255, 255, 0.06);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--mx-bg-primary);
+  color: var(--mx-text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Global Noise Texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sections */
+section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+  z-index: 1;
+  scroll-snap-align: start;
+}
+
+.section-inner {
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Typography */
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mx-purple);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.teal-text {
+  color: var(--mx-teal);
+}
+
+.gold-text {
+  color: var(--mx-gold);
+}
+
+/* ===== HERO SECTION ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  animation: float 20s ease-in-out infinite;
+}
+
+.hero-bg-orb.orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, var(--mx-purple), transparent 70%);
+  top: -10%; right: -5%;
+}
+
+.hero-bg-orb.orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, var(--mx-pink), transparent 70%);
+  bottom: 5%; left: -5%;
+  animation-delay: -7s;
+}
+
+.hero-bg-orb.orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, var(--mx-teal), transparent 70%);
+  top: 40%; left: 30%;
+  animation-delay: -14s;
+  opacity: 0.2;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -30px) scale(1.05); }
+  66% { transform: translate(-20px, 20px) scale(0.95); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.hero-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid var(--mx-border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--mx-purple);
+  letter-spacing: 0.03em;
+}
+
+.hero-badge .dot {
+  width: 6px; height: 6px;
+  background: var(--mx-teal);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero h1 {
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-sub {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  color: var(--mx-text-secondary);
+  max-width: 640px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--mx-border-subtle);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 720px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.hero-stat {
+  background: var(--mx-bg-card);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.hero-stat .value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--mx-teal);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.hero-stat .desc {
+  font-size: 0.78rem;
+  color: var(--mx-text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Booran profile callout */
+.booran-profile {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(236,72,153,0.04));
+  border: 1px solid var(--mx-border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  max-width: 720px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+
+.booran-icon {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  color: white;
+  flex-shrink: 0;
+}
+
+.booran-profile-text h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.booran-profile-text p {
+  font-size: 0.82rem;
+  color: var(--mx-text-muted);
+  line-height: 1.5;
+}
+
+.brand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.brand-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  padding: 3px 8px;
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: 4px;
+  color: var(--mx-text-secondary);
+  letter-spacing: 0.05em;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem-section {
+  background: linear-gradient(180deg, var(--mx-bg-primary), #151520);
+}
+
+.problem-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: stretch;
+  margin-top: 48px;
+}
+
+.problem-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: space-between;
+}
+
+.problem-item {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: rgba(124, 58, 237, 0.04);
+  border: 1px solid rgba(124, 58, 237, 0.12);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.problem-item:hover {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(236, 72, 153, 0.25);
+  transform: translateX(4px);
+}
+
+.problem-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.problem-item h3 {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: var(--mx-pink);
+}
+
+.problem-item p {
+  font-size: 0.82rem;
+  color: var(--mx-text-muted);
+  line-height: 1.5;
+}
+
+.solution-preview {
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-preview::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mx-purple), var(--mx-pink), var(--mx-teal));
+}
+
+.solution-preview .label {
+  margin-bottom: 16px;
+}
+
+.solution-preview h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--mx-border-subtle);
+  font-size: 0.85rem;
+}
+
+.comparison-row:last-child { border: none; }
+
+.comparison-row .feature { color: var(--mx-text-secondary); font-weight: 500; }
+.comparison-row .old { color: var(--mx-pink); font-weight: 500; opacity: 0.7; text-align: center; }
+.comparison-row .new { color: var(--mx-teal); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-align: center; }
+
+/* ===== HOW IT WORKS ===== */
+.how-section {
+  background: #151520;
+}
+
+.pathways {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.pathway-card {
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border-subtle);
+  border-radius: 20px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.pathway-card:hover {
+  border-color: var(--mx-border);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(124, 58, 237, 0.1);
+}
+
+.pathway-card.preferred {
+  border-color: var(--mx-purple);
+  background: linear-gradient(160deg, rgba(124,58,237,0.08), var(--mx-bg-card) 40%);
+}
+
+.pathway-card.preferred::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mx-purple), var(--mx-pink));
+}
+
+.preferred-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.pathway-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3rem;
+  font-weight: 700;
+  color: rgba(124, 58, 237, 0.12);
+  position: absolute;
+  top: 20px; right: 28px;
+}
+
+.pathway-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+}
+
+.pathway-card > p {
+  font-size: 0.88rem;
+  color: var(--mx-text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.step-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: flex;
+  gap: 14px;
+  padding: 12px 0;
+  position: relative;
+}
+
+.step-dot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.step-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--mx-purple);
+  border: 2px solid var(--mx-purple-dark);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.step-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(180deg, var(--mx-purple), transparent);
+  margin-top: 4px;
+}
+
+.step-content {
+  font-size: 0.82rem;
+  color: var(--mx-text-secondary);
+  line-height: 1.5;
+  padding-bottom: 4px;
+}
+
+.step-content strong {
+  color: var(--mx-text-primary);
+  font-weight: 600;
+}
+
+/* ===== USP / KICKER ===== */
+.usp-section {
+  background: linear-gradient(180deg, #151520, var(--mx-bg-primary));
+  position: relative;
+}
+
+.usp-visual {
+  margin-top: 56px;
+  position: relative;
+}
+
+.usp-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.usp-node {
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border);
+  border-radius: 16px;
+  padding: 32px 28px;
+  text-align: center;
+  min-width: 200px;
+  max-width: 240px;
+  transition: all 0.3s ease;
+}
+
+.usp-node:hover {
+  border-color: var(--mx-purple);
+  transform: scale(1.03);
+}
+
+.usp-node.highlight {
+  background: linear-gradient(160deg, rgba(20,184,166,0.1), var(--mx-bg-card) 60%);
+  border-color: var(--mx-teal);
+}
+
+.usp-node .node-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.usp-node h3 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+
+.usp-node p {
+  font-size: 0.78rem;
+  color: var(--mx-text-muted);
+  line-height: 1.5;
+}
+
+.usp-arrow {
+  font-size: 1.8rem;
+  color: var(--mx-purple);
+  padding: 0 12px;
+  opacity: 0.6;
+}
+
+.usp-kicker {
+  margin-top: 56px;
+  background: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(124,58,237,0.06));
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  border-radius: 20px;
+  padding: 40px 48px;
+  text-align: center;
+}
+
+.usp-kicker h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+}
+
+.usp-kicker p {
+  font-size: 1rem;
+  color: var(--mx-text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.usp-kicker .highlight-stat {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--mx-teal);
+}
+
+/* ===== REVENUE SECTION ===== */
+.revenue-section {
+  background: var(--mx-bg-primary);
+}
+
+.revenue-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.revenue-card {
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border-subtle);
+  border-radius: 20px;
+  padding: 36px;
+  transition: all 0.3s ease;
+}
+
+.revenue-card:hover {
+  border-color: var(--mx-border);
+}
+
+.revenue-card .label {
+  margin-bottom: 12px;
+}
+
+.revenue-card h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+}
+
+.revenue-card > p {
+  font-size: 0.85rem;
+  color: var(--mx-text-muted);
+  margin-bottom: 24px;
+}
+
+.big-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Tier Table */
+.tier-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.tier-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mx-text-muted);
+  text-align: left;
+  padding: 0 12px 8px;
+}
+
+.tier-table td {
+  padding: 14px 12px;
+  font-size: 0.85rem;
+  color: var(--mx-text-secondary);
+  background: var(--mx-bg-elevated);
+}
+
+.tier-table tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.tier-table tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.tier-table .tier-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--mx-purple);
+}
+
+.tier-table .tier-rate {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--mx-teal);
+  font-size: 1rem;
+}
+
+/* Bar Chart */
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 200px;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 8px 8px 4px 4px;
+  position: relative;
+  min-height: 16px;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bar .bar-label {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.bar-group .bar-year {
+  font-size: 0.72rem;
+  color: var(--mx-text-muted);
+  font-weight: 500;
+}
+
+/* ===== CONTROL SECTION ===== */
+.control-section {
+  background: #151520;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.control-card {
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border-subtle);
+  border-radius: 16px;
+  padding: 32px 28px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-card:hover {
+  border-color: var(--mx-border);
+  transform: translateY(-2px);
+}
+
+.control-card .card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.control-card h3 {
+  margin-bottom: 8px;
+}
+
+.control-card p {
+  font-size: 0.82rem;
+  color: var(--mx-text-muted);
+  line-height: 1.6;
+}
+
+.control-card .value-tag {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--mx-teal);
+  background: var(--mx-teal-glow);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* ===== PROJECTIONS SECTION ===== */
+.projections-section {
+  background: linear-gradient(180deg, #151520, var(--mx-bg-primary));
+}
+
+.projection-table-wrap {
+  margin-top: 48px;
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border);
+  border-radius: 20px;
+  padding: 36px;
+  overflow-x: auto;
+}
+
+.projection-table-wrap .label { margin-bottom: 16px; }
+
+.projection-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.projection-table thead th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mx-text-muted);
+  text-align: left;
+  padding: 0 16px 16px;
+  border-bottom: 1px solid var(--mx-border-subtle);
+}
+
+.projection-table tbody td {
+  padding: 18px 16px;
+  font-size: 0.88rem;
+  color: var(--mx-text-secondary);
+  border-bottom: 1px solid var(--mx-border-subtle);
+}
+
+.projection-table tbody tr:last-child td { border: none; }
+
+.projection-table .emp-size {
+  font-weight: 600;
+  color: var(--mx-text-primary);
+}
+
+.projection-table .money {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--mx-teal);
+}
+
+.projection-table .money-gold {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--mx-gold);
+  font-size: 0.95rem;
+}
+
+.projection-note {
+  margin-top: 16px;
+  font-size: 0.75rem;
+  color: var(--mx-text-muted);
+  font-style: italic;
+}
+
+/* Booran-specific projection */
+.booran-projection {
+  margin-top: 32px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.06), rgba(124,58,237,0.06));
+  border: 1px solid rgba(251, 191, 36, 0.2);
+  border-radius: 16px;
+  padding: 32px 36px;
+}
+
+.booran-projection h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+.booran-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.booran-num {
+  text-align: center;
+}
+
+.booran-num .val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--mx-gold);
+  display: block;
+}
+
+.booran-num .desc {
+  font-size: 0.78rem;
+  color: var(--mx-text-muted);
+  margin-top: 4px;
+}
+
+/* ===== WE HANDLE SECTION ===== */
+.handle-section {
+  background: var(--mx-bg-primary);
+}
+
+.handle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 48px;
+}
+
+.handle-item {
+  display: flex;
+  gap: 16px;
+  padding: 24px;
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border-subtle);
+  border-radius: 14px;
+  transition: all 0.3s ease;
+}
+
+.handle-item:hover {
+  border-color: var(--mx-border);
+}
+
+.handle-check {
+  width: 32px; height: 32px;
+  background: rgba(20, 184, 166, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--mx-teal);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.handle-item h3 {
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.handle-item p {
+  font-size: 0.8rem;
+  color: var(--mx-text-muted);
+  line-height: 1.5;
+}
+
+/* ===== CTA SECTION ===== */
+.cta-section {
+  min-height: 70vh;
+  background: linear-gradient(180deg, var(--mx-bg-primary), #151520);
+  text-align: center;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12), transparent 60%);
+  border-radius: 50%;
+  filter: blur(80px);
+}
+
+.cta-section h2 {
+  margin-bottom: 20px;
+}
+
+.cta-sub {
+  font-size: 1.1rem;
+  color: var(--mx-text-secondary);
+  max-width: 560px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+
+.cta-contact {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: var(--mx-bg-card);
+  border: 1px solid var(--mx-border);
+  border-radius: 20px;
+  padding: 32px 48px;
+}
+
+.cta-contact .name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+}
+
+.cta-contact .role {
+  font-size: 0.82rem;
+  color: var(--mx-text-muted);
+}
+
+.cta-links {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+}
+
+.cta-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--mx-purple);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cta-links a:hover { color: var(--mx-pink); }
+
+.cta-portal {
+  margin-top: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));
+  color: white;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.3);
+}
+
+.cta-portal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.4);
+}
+
+.cta-footer {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--mx-border-subtle);
+}
+
+.cta-footer p {
+  font-size: 0.72rem;
+  color: var(--mx-text-muted);
+}
+
+/* ===== CONFIDENTIAL WATERMARK ===== */
+.confidential-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--mx-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  z-index: 100;
+  font-size: 0.7rem;
+}
+
+.confidential-bar .left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--mx-text-muted);
+}
+
+.confidential-bar .left .lock { color: var(--mx-purple); }
+
+.confidential-bar .right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--mx-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  section { padding: 60px 24px; }
+  .problem-grid, .pathways, .revenue-grid, .handle-grid { grid-template-columns: 1fr; }
+  .control-grid { grid-template-columns: 1fr 1fr; }
+  .usp-flow { flex-direction: column; }
+  .usp-arrow { transform: rotate(90deg); padding: 6px 0; }
+  .booran-numbers { grid-template-columns: 1fr; gap: 16px; }
+  .hero-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  section { padding: 48px 16px; }
+  .control-grid { grid-template-columns: 1fr; }
+  .hero-stats { grid-template-columns: 1fr; }
+  .cta-links { flex-direction: column; gap: 8px; }
+}
+
+/* Page break helpers for print/PDF */
+@media print {
+  section { page-break-after: always; min-height: auto; padding: 40px; }
+  .confidential-bar { position: static; }
+}
+</style>
+</head>
+<body>
+
+<!-- Confidential Bar -->
+<div class="confidential-bar">
+  <div class="left"><span class="lock" style="display: inline-block; width: 8px; height: 8px; border-radius: 2px; background: var(--mx-purple); margin-right: 2px;"></span> Confidential — Prepared exclusively for Booran Motors</div>
+  <div class="right">MXDealerAdvantage &bull; Feb 2026</div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" style="padding-top: 100px;">
+  <div class="hero-bg-orb orb-1"></div>
+  <div class="hero-bg-orb orb-2"></div>
+  <div class="hero-bg-orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-logo-row">
+      <span style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; letter-spacing: -0.02em;"><span style="color: var(--mx-text-primary);">millar</span><span style="background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">X</span></span>
+      <span style="color: var(--mx-text-muted); font-size: 1.4rem; font-weight: 200;">×</span>
+      <span style="font-family: 'DM Serif Display', serif; font-size: 1.3rem;">Booran Motors</span>
+    </div>
+
+    <div class="hero-badge"><span class="dot"></span> Dealer Partnership Proposal</div>
+
+    <h1>Own Every<br><span class="gradient-text">Novated Dollar.</span></h1>
+
+    <p class="hero-sub">
+      MXDealerAdvantage is a technology platform that gives your dealership the tools to run its own novated lease program. Quote in seconds, manage your pipeline, and let the system surface compounding lead opportunities — automatically, on repeat.
+    </p>
+
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="value">1</span>
+        <span class="desc">Portal — Quote in Seconds</span>
+      </div>
+      <div class="hero-stat">
+        <span class="value">2</span>
+        <span class="desc">Options — Write or Refer</span>
+      </div>
+      <div class="hero-stat">
+        <span class="value">100%</span>
+        <span class="desc">Aftermarket & Insurance</span>
+      </div>
+      <div class="hero-stat">
+        <span class="value">$0</span>
+        <span class="desc">Procurement or Admin Fees</span>
+      </div>
+    </div>
+
+    <!-- Profit Levers -->
+    <div style="margin-top: 24px; max-width: 720px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.9s;">
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.15); border-radius: 100px; padding: 6px 16px; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; color: var(--mx-teal); margin-bottom: 12px;">CONTROL YOUR PROFIT LEVERS</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Vehicle Gross ✓</span>
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Aftermarket ✓</span>
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Insurance & Warranty ✓</span>
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Finance Model ✓</span>
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Remarketing ✓</span>
+        <span style="font-size: 0.78rem; color: var(--mx-text-secondary); padding: 5px 12px; background: var(--mx-bg-card); border: 1px solid var(--mx-border-subtle); border-radius: 8px;">Employer Network ✓</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; max-width: 720px; opacity: 0; animation: fadeUp 0.8s ease forwards 1s;">
+      <!-- EV Hot Spot -->
+      <div style="background: linear-gradient(135deg, rgba(20,184,166,0.08), rgba(124,58,237,0.04)); border: 1px solid rgba(20,184,166,0.2); border-radius: 16px; padding: 24px 28px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(135deg, var(--mx-teal), #0D9488);"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-teal);">EV IS THE ENTRY POINT</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--mx-text-secondary); line-height: 1.65; margin: 0 0 14px;">
+          FBT-exempt EVs are the hottest novated lease product in market right now — and Booran is perfectly positioned with <strong style="color: var(--mx-teal);">BYD, Hyundai, Kia, MG</strong> leading the charge. Almost every brand in your group now has EV options coming through.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.2); border-radius: 4px; color: var(--mx-teal);">BYD ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.2); border-radius: 4px; color: var(--mx-teal);">Hyundai ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.2); border-radius: 4px; color: var(--mx-teal);">Kia ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.12); border: 1px solid rgba(20,184,166,0.2); border-radius: 4px; color: var(--mx-teal);">MG ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">Nissan ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">Mitsubishi ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">Skoda ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">Suzuki ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">Ford ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(20,184,166,0.08); border: 1px solid rgba(20,184,166,0.12); border-radius: 4px; color: rgba(20,184,166,0.7);">VW ⚡</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; padding: 4px 10px; background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.15); border-radius: 4px; color: var(--mx-text-muted);">Isuzu UTE</span>
+        </div>
+      </div>
+
+      <!-- NVES Pressure -->
+      <div style="background: linear-gradient(135deg, rgba(251,191,36,0.06), rgba(124,58,237,0.04)); border: 1px solid rgba(251,191,36,0.15); border-radius: 16px; padding: 24px 28px; margin-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(135deg, var(--mx-gold), #F59E0B);"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-gold);">NVES IS CHANGING THE GAME</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--mx-text-secondary); line-height: 1.65; margin: 0;">
+          The New Vehicle Efficiency Standard is adding real cost pressure to traditional ICE vehicles — and that's only going one direction. Novated leasing is an <strong style="color: var(--mx-text-primary);">existing lever your customers already understand</strong>, used in a new way. It softens the sticker shock of NVES-impacted pricing, makes EVs a no-brainer with FBT exemption, and keeps ICE vehicles competitive through salary packaging. The timing has never been better to turn novated leasing into a core part of your sales process.
+        </p>
+      </div>
+
+      <!-- Scale Across Sites -->
+      <div style="background: var(--mx-bg-card); border: 1px solid var(--mx-border); border-radius: 16px; padding: 24px 28px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+          <span style="display: inline-block; width: 14px; height: 14px; border-radius: 3px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-purple);">TEST, ROLL, COMPOUND</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--mx-text-secondary); line-height: 1.65; margin: 0;">
+          With <strong style="color: var(--mx-text-primary);">13+ brands across 5+ locations</strong>, Booran can start with the high-demand EV brands, prove the model, and roll it across every site. Our platform makes traditional ICE leasing just as competitive — so once the pipeline is running on EVs, you expand into utes, SUVs, and commercial vehicles. Each brand, each location multiplies the compounding effect exponentially.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE PROBLEM ===== -->
+<section class="problem-section">
+  <div class="section-inner">
+    <span class="label">The Old Way Is Broken</span>
+    <h2>Refer & Hope Is<br>Costing <span class="gradient-text">Your</span> Dealership</h2>
+
+    <div class="problem-grid">
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-icon" style="background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); border-radius: 10px;"></div>
+          <div>
+            <h3>Refer Out, Lose Control</h3>
+            <p>You hand the customer to a fleet company or broker and hope they come back. Most don't. The finance margin, the relationship, and the future sale walk out with them.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon" style="background: linear-gradient(135deg, var(--mx-pink), #F472B6); border-radius: 10px;"></div>
+          <div>
+            <h3>No Tools, No Visibility</h3>
+            <p>You can't quote a novated lease in your showroom. No portal, no pricing, no way to give the customer an answer while they're standing in front of you.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon" style="background: linear-gradient(135deg, #F472B6, #FB923C); border-radius: 10px;"></div>
+          <div>
+            <h3>Someone Else Owns the Pipeline</h3>
+            <p>Fleet companies build employer relationships on the back of your customers — then send the next deal to their preferred dealer, not you.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon" style="background: linear-gradient(135deg, #FB923C, var(--mx-gold)); border-radius: 10px;"></div>
+          <div>
+            <h3>Remarketing Disappears</h3>
+            <p>When a lease matures, the trade-in, the re-lease, the next car — it all happens somewhere else. You never see that customer again.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="solution-preview">
+        <span class="label">The MXDealerAdvantage Difference</span>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem;">Your Tech. <span class="teal-text">Your Program.</span></h3>
+        <p style="font-size: 0.85rem; color: var(--mx-text-muted); margin-bottom: 20px; line-height: 1.6;">Stop referring customers out and hoping for the best. Our platform puts the tools in your hands to run your own novated lease program.</p>
+
+        <!-- Column headers -->
+        <div class="comparison-row" style="border-bottom: 1px solid var(--mx-border); padding-bottom: 10px; margin-bottom: 4px;">
+          <span class="feature"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mx-pink); text-align: center; opacity: 0.7;">Refer & Hope</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mx-teal); text-align: center;">Your Portal</span>
+        </div>
+
+        <div class="comparison-row">
+          <span class="feature">Quoting</span>
+          <span class="old">Call a broker, wait for callback</span>
+          <span class="new">✓ Instant self-service</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Deal Control</span>
+          <span class="old">Handed off to fleet company</span>
+          <span class="new">✓ You own the process</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Customer Experience</span>
+          <span class="old">Passed around, slow, opaque</span>
+          <span class="new">✓ Seamless, in-showroom</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Aftermarket & Insurance</span>
+          <span class="old">Lost to fleet provider</span>
+          <span class="new">✓ 100% yours</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Procurement Fees</span>
+          <span class="old">$500–$1,500+ per deal</span>
+          <span class="new">✓ $0</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Employer Pipeline</span>
+          <span class="old">No access, no visibility</span>
+          <span class="new">✓ You build it, you own it</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Remarketing</span>
+          <span class="old">Customer disappears at maturity</span>
+          <span class="new">✓ Pushed back to your showroom</span>
+        </div>
+        <div class="comparison-row">
+          <span class="feature">Pricing</span>
+          <span class="old">Inflated, hidden margins</span>
+          <span class="new">✓ Wholesale, transparent</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-section">
+  <div class="section-inner">
+    <span class="label">How the Platform Works</span>
+    <h2>One Portal, <span class="gradient-text">Two Options</span></h2>
+
+    <div class="pathways">
+      <!-- Option A -->
+      <div class="pathway-card">
+        <span class="pathway-number">A</span>
+        <span class="label" style="color: var(--mx-text-muted);">Option A</span>
+        <h3>Refer to millarX</h3>
+        <p>Customer walks in interested in novated leasing. You quote them in the portal, they accept, then refer the deal to us. We onboard the employer, handle the finance, and manage the lease. You deliver the car.</p>
+        <div class="step-flow">
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>You quote in the portal</strong> — instant pricing, transparent rates</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>Customer accepts</strong> — deal referred to millarX</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>millarX onboards the employer</strong> — we handle all employer sign-up and compliance</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>millarX completes finance</strong> — we process the application and settlement</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>You deliver the vehicle</strong> — retain all aftermarket, insurance, gross</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div></div>
+            <div class="step-content"><strong>millarX manages the lease</strong> — ongoing compliance, remarketing, and maturity tracking</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option B (Preferred) -->
+      <div class="pathway-card preferred">
+        <span class="preferred-badge">★ Preferred</span>
+        <span class="pathway-number">B</span>
+        <span class="label">Option B</span>
+        <h3>Write the Finance Yourself</h3>
+        <p>You quote in the portal, the customer accepts, and millarX onboards the employer. Then your F&I team writes the finance through their existing system — business as usual. You settle, you deliver, and millarX manages the lease from there.</p>
+        <div class="step-flow">
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>You quote in the portal</strong> — instant pricing, transparent rates</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>Customer accepts</strong> — deal stays with you</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>millarX onboards the employer</strong> — we handle all employer sign-up and compliance</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>Your F&I writes the finance</strong> — through their existing system (e.g. Angle Finance)</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div><div class="step-line"></div></div>
+            <div class="step-content"><strong>You settle & deliver</strong> — retain full gross, aftermarket, insurance</div>
+          </div>
+          <div class="step">
+            <div class="step-dot-container"><div class="step-dot"></div></div>
+            <div class="step-content"><strong>millarX manages the lease</strong> — ongoing compliance, remarketing, maturity tracking, and compounding employer pipeline</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE USP / KICKER ===== -->
+<section class="usp-section">
+  <div class="section-inner">
+    <span class="label">Platform Intelligence</span>
+    <h2>The System Finds the<br><span class="gradient-text">Opportunities for You</span></h2>
+
+    <p style="font-size: 1rem; color: var(--mx-text-secondary); max-width: 720px; line-height: 1.7; margin-top: 16px;">
+      MXDealerAdvantage isn't just a quoting tool — it's a platform that helps you identify, manage, and grow novated lease opportunities across every type of customer that walks through your doors.
+    </p>
+
+    <div class="usp-visual">
+      <!-- Opportunity Types -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px;">
+
+        <div class="usp-node" style="max-width: none; min-width: auto; text-align: left; padding: 28px 24px;">
+          <div style="width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--mx-teal), #0D9488); margin-bottom: 14px;"></div>
+          <h3 style="font-size: 1rem;">SME Employers</h3>
+          <p>Small-to-medium businesses are the sweet spot. Low friction to onboard, high staff engagement, and they compound fast as word spreads inside the company.</p>
+        </div>
+
+        <div class="usp-node" style="max-width: none; min-width: auto; text-align: left; padding: 28px 24px;">
+          <div style="width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); margin-bottom: 14px;"></div>
+          <h3 style="font-size: 1rem;">Corporate & Enterprise</h3>
+          <p>Larger employers mean bigger staff pools. One corporate sign-on can deliver a steady stream of leases across departments and locations for years.</p>
+        </div>
+
+        <div class="usp-node" style="max-width: none; min-width: auto; text-align: left; padding: 28px 24px;">
+          <div style="width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--mx-gold), #F59E0B); margin-bottom: 14px;"></div>
+          <h3 style="font-size: 1rem;">BYO Leasing</h3>
+          <p>Customers who already have an employer set up can bring their own deal. They choose the car, you deliver it — no employer onboarding needed. This channel grows easier as your employer network expands.</p>
+        </div>
+
+        <div class="usp-node" style="max-width: none; min-width: auto; text-align: left; padding: 28px 24px;">
+          <div style="width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, var(--mx-pink), #F472B6); margin-bottom: 14px;"></div>
+          <h3 style="font-size: 1rem;">Re-lease & Trade-Up</h3>
+          <p>Every lease has a maturity date. The system tracks it. When time's up, that's a warm lead back to your showroom — trade-in, upgrade, or re-lease on a new vehicle.</p>
+        </div>
+
+      </div>
+
+      <!-- Platform Insight -->
+      <div class="usp-kicker" style="margin-top: 32px;">
+        <h3>Knowledge Builds Over Time</h3>
+        <p>
+          The more leases you write, the more your platform learns. You start to see which employers have the highest uptake, which brands convert best on novated, where the BYO opportunities are coming from, and when maturities are clustering. 
+          <span class="highlight-stat">The system does the heavy lifting</span> — your team just needs to follow the opportunities it surfaces. What starts as a new channel becomes 
+          <span class="highlight-stat">an embedded part of how you sell cars.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVENUE MODEL ===== -->
+<section class="revenue-section">
+  <div class="section-inner">
+    <span class="label">Revenue Model</span>
+    <h2>One Portal.<br><span class="teal-text">Your Choice.</span></h2>
+
+    <!-- One Portal Intro -->
+    <div class="revenue-card" style="margin-top: 48px; border-color: var(--mx-purple); background: linear-gradient(160deg, rgba(124,58,237,0.06), var(--mx-bg-card) 40%); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--mx-purple), var(--mx-pink));"></div>
+      <span class="label">One Portal — Two Options</span>
+      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-top: 8px; margin-bottom: 8px;">The MXDealerAdvantage Dealer Portal</h3>
+      <p style="font-size: 0.92rem; color: var(--mx-text-secondary); line-height: 1.7; max-width: 720px;">
+        Your team quotes the customer directly through the portal in seconds. From there, you choose how the deal gets done:
+      </p>
+    </div>
+
+    <div class="revenue-grid" style="margin-top: 20px;">
+      <!-- Option A -->
+      <div class="revenue-card">
+        <span class="label" style="color: var(--mx-pink);">Option A</span>
+        <h3>Refer to millarX</h3>
+        <p>Quote in the portal, customer accepts, refer to millarX. We onboard the employer, handle the finance, and manage the lease. You deliver the car.</p>
+        <div style="margin-top: 20px; padding: 20px; background: var(--mx-bg-elevated); border-radius: 12px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="big-number gradient-text" style="font-size: 2.4rem;">Commission</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--mx-text-muted); margin-top: 8px;">
+            Paid to Booran on every referred deal — just quote, refer, and deliver
+          </p>
+        </div>
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-pink);">✓</span> Zero admin — quote, refer, deliver
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-pink);">✓</span> millarX handles finance, employer onboarding & lease management
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-pink);">✓</span> You still retain aftermarket, insurance, gross & delivery
+          </div>
+        </div>
+      </div>
+
+      <!-- Option B (Preferred) -->
+      <div class="revenue-card">
+        <span class="label" style="color: var(--mx-teal);">Option B — Preferred</span>
+        <h3>Write the Finance Yourself</h3>
+        <p>Quote in the portal, customer accepts, millarX onboards the employer. Your F&I writes the finance through their existing system, you settle and deliver. millarX manages the lease.</p>
+        <div style="margin-top: 20px; padding: 20px; background: var(--mx-bg-elevated); border-radius: 12px;">
+          <div style="display: flex; align-items: baseline; gap: 8px;">
+            <span class="big-number teal-text" style="font-size: 2.4rem;">Flat Fee</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--mx-text-muted); margin-top: 8px;">
+            Per deal to millarX for employer onboarding, lease management, compliance & remarketing
+          </p>
+        </div>
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-teal);">✓</span> Maximum dealer margin on finance
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-teal);">✓</span> Full control of the customer journey
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--mx-text-secondary);">
+            <span style="color: var(--mx-teal);">✓</span> millarX handles employer onboarding & everything post-settlement
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Employer Tiers (applies to both options) -->
+    <div class="revenue-card" style="margin-top: 20px;">
+      <span class="label">Both Options — Employer Network Commissions</span>
+      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-top: 8px;">Tiered Employer Commissions</h3>
+      <p style="font-size: 0.85rem; color: var(--mx-text-muted); margin-bottom: 20px;">Regardless of which option you choose, every employer you introduce earns Booran a tiered commission on all future deals through that employer.</p>
+      <table class="tier-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Deals</th>
+            <th>Rate</th>
+            <th>Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tier-badge">TIER 1</span></td>
+            <td>0–5 deals</td>
+            <td><span class="tier-rate">15%</span></td>
+            <td>Starting rate</td>
+          </tr>
+          <tr>
+            <td><span class="tier-badge">TIER 2</span></td>
+            <td>6–10 deals</td>
+            <td><span class="tier-rate">17.5%</span></td>
+            <td>Volume growth</td>
+          </tr>
+          <tr>
+            <td><span class="tier-badge">TIER 3</span></td>
+            <td>11+ deals</td>
+            <td><span class="tier-rate">20%</span></td>
+            <td>Max rate — retroactive</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size: 0.75rem; color: var(--mx-text-muted); margin-top: 12px; font-style: italic;">
+        * Tiers apply retroactively to all deals once threshold is met. Covers all refinances & replacement leases.
+      </p>
+    </div>
+
+    <!-- The Dream: Dollar Comparison -->
+    <div class="revenue-card" style="margin-top: 32px; padding: 48px; border-color: var(--mx-purple); position: relative; overflow: hidden; background: linear-gradient(160deg, rgba(124,58,237,0.04), var(--mx-bg-card) 30%, rgba(20,184,166,0.04));">
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--mx-purple), var(--mx-pink), var(--mx-teal));"></div>
+      <span class="label" style="font-size: 0.75rem;">Show Me the Money</span>
+      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-top: 8px; margin-bottom: 8px;">One Customer. Two Very Different Outcomes.</h3>
+      <p style="font-size: 1rem; color: var(--mx-text-secondary); line-height: 1.7; max-width: 800px; margin-bottom: 40px;">
+        Right now, referring a novated lease to a company like Smart Leasing pays a one-off $1,500 fee — and you never see that customer again. Here's what happens when you keep the deal in-house through MXDealerAdvantage.
+      </p>
+
+      <!-- Side by Side Comparison -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+
+        <!-- LEFT: Refer Out -->
+        <div style="background: linear-gradient(160deg, rgba(236,72,153,0.04), var(--mx-bg-elevated) 40%); border-radius: 20px; padding: 36px; border: 2px solid rgba(236,72,153,0.15); position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--mx-pink); opacity: 0.5;"></div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-pink); text-transform: uppercase; margin-bottom: 20px; opacity: 0.8;">Refer Out — Typical Broker</div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(236,72,153,0.06); border-radius: 10px; border: 1px solid rgba(236,72,153,0.1);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-primary); font-weight: 500;">Referral fee</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--mx-pink);">$1,500</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; opacity: 0.35;">
+              <span style="font-size: 0.85rem; color: var(--mx-text-muted);">Aftermarket</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--mx-text-muted); text-decoration: line-through;">lost</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; opacity: 0.35;">
+              <span style="font-size: 0.85rem; color: var(--mx-text-muted);">Insurance</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--mx-text-muted); text-decoration: line-through;">lost</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; opacity: 0.35;">
+              <span style="font-size: 0.85rem; color: var(--mx-text-muted);">Trade-in at maturity</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--mx-text-muted); text-decoration: line-through;">gone</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; opacity: 0.35;">
+              <span style="font-size: 0.85rem; color: var(--mx-text-muted);">Re-lease / next deal</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--mx-text-muted); text-decoration: line-through;">gone</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; opacity: 0.35;">
+              <span style="font-size: 0.85rem; color: var(--mx-text-muted);">Employer pipeline</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--mx-text-muted); text-decoration: line-through;">none</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 28px; padding: 24px; border-top: 2px solid rgba(236,72,153,0.15); text-align: center;">
+            <div style="font-size: 0.78rem; color: var(--mx-text-muted); margin-bottom: 8px;">Total — first deal & forever</div>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--mx-pink);">$1,500</span>
+            <p style="font-size: 0.78rem; color: var(--mx-text-muted); margin-top: 12px; font-style: italic; line-height: 1.5;">One payment. Customer disappears.<br>No trade-in. No re-lease. No relationship.</p>
+          </div>
+        </div>
+
+        <!-- RIGHT: Write the Deal -->
+        <div style="background: linear-gradient(160deg, rgba(20,184,166,0.06), var(--mx-bg-elevated) 40%); border-radius: 20px; padding: 36px; border: 2px solid rgba(20,184,166,0.25); position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(20,184,166,0.06);">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--mx-teal), var(--mx-purple));"></div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-teal); text-transform: uppercase; margin-bottom: 20px;">Write the Deal — MXDealerAdvantage</div>
+
+          <!-- First Deal -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(20,184,166,0.06); border-radius: 10px; border: 1px solid rgba(20,184,166,0.12);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-primary); font-weight: 500;">Finance commission <span style="font-size: 0.72rem; color: var(--mx-text-muted);">(8.5% / 3yr)</span></span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--mx-teal);">$1,800</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(20,184,166,0.06); border-radius: 10px; border: 1px solid rgba(20,184,166,0.12);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-primary); font-weight: 500;">Aftermarket pack</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--mx-teal);">$1,200</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(20,184,166,0.06); border-radius: 10px; border: 1px solid rgba(20,184,166,0.12);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-primary); font-weight: 500;">Comprehensive insurance</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--mx-teal);">$200</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(20,184,166,0.04); border-radius: 10px; border: 1px solid rgba(20,184,166,0.08);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-secondary);">Floorplan offset <span style="font-size: 0.72rem; color: var(--mx-text-muted);">(if applicable)</span></span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; font-weight: 500; color: var(--mx-text-muted);">varies</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(124,58,237,0.06); border-radius: 10px; border: 1px solid rgba(124,58,237,0.12);">
+              <span style="font-size: 0.88rem; color: var(--mx-text-secondary);">millarX platform fee</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--mx-purple);">–$500</span>
+            </div>
+          </div>
+
+          <!-- First Deal Total -->
+          <div style="margin-top: 24px; padding: 20px 24px; background: rgba(20,184,166,0.08); border-radius: 12px; border: 1px solid rgba(20,184,166,0.15); display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 1rem; font-weight: 600; color: var(--mx-text-primary);">Net — first deal</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.8rem; font-weight: 700; color: var(--mx-teal);">$2,700</span>
+          </div>
+
+          <!-- Repeat Cycle -->
+          <div style="margin-top: 20px; padding: 24px; background: linear-gradient(160deg, rgba(251,191,36,0.06), var(--mx-bg-primary) 60%); border-radius: 14px; border: 1px solid rgba(251,191,36,0.15);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-gold); text-transform: uppercase; margin-bottom: 14px;">+ At Every Maturity (~32 months)</div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(251,191,36,0.04); border-radius: 8px;">
+                <span style="font-size: 0.88rem; color: var(--mx-text-secondary);">Trade-in margin <span style="font-size: 0.72rem; color: var(--mx-text-muted);">(~15% on used value)</span></span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--mx-gold);">~$3,750</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: rgba(251,191,36,0.04); border-radius: 8px;">
+                <span style="font-size: 0.88rem; color: var(--mx-text-secondary);">New deal (re-lease / refinance)</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; font-weight: 700; color: var(--mx-gold);">$2,700</span>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 14px 0; margin-top: 10px; border-top: 1px solid rgba(251,191,36,0.15);">
+              <span style="font-size: 0.92rem; font-weight: 700; color: var(--mx-text-primary);">Per cycle value</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--mx-gold);">~$6,450</span>
+            </div>
+          </div>
+
+          <!-- Lifetime Value -->
+          <div style="margin-top: 20px; padding: 28px; background: linear-gradient(135deg, rgba(251,191,36,0.08), rgba(20,184,166,0.06)); border-radius: 14px; border: 2px solid rgba(251,191,36,0.2); text-align: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-gold); text-transform: uppercase; margin-bottom: 16px;">Best-Case Scenario — 20-Year Loyal Customer</div>
+            <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 16px;">
+              <div style="text-align: center;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--mx-text-muted);">First deal</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--mx-text-primary);">$2,700</div>
+              </div>
+              <div style="color: var(--mx-text-muted); font-size: 1.2rem; align-self: center;">+</div>
+              <div style="text-align: center;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--mx-text-muted);">~7 cycles</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 600; color: var(--mx-text-primary);">$45,150</div>
+              </div>
+            </div>
+            <div style="padding-top: 16px; border-top: 2px solid rgba(251,191,36,0.2);">
+              <div style="font-size: 0.85rem; color: var(--mx-text-secondary); margin-bottom: 8px;">Lifetime customer value</div>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--mx-gold);">~$47,850</span>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--mx-text-muted); margin-top: 14px; font-style: italic; line-height: 1.5; max-width: 400px; margin-left: auto; margin-right: auto;">This is the best-case — a loyal customer who re-leases every cycle. But every dealer knows the ones who do. The customer who's bought their third Tucson, the family that keeps coming back. Novated leasing just systemises that loyalty.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Multiplier -->
+      <div style="margin-top: 32px; padding: 36px 40px; background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(20,184,166,0.08)); border: 2px solid var(--mx-border); border-radius: 20px; text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-text-muted); text-transform: uppercase; margin-bottom: 24px;">Best-Case: One Loyal Customer Over a Working Lifetime</div>
+        <div style="display: flex; justify-content: center; align-items: center; gap: 56px; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--mx-pink); opacity: 0.7;">$1,500</div>
+            <div style="font-size: 0.82rem; color: var(--mx-text-muted); margin-top: 6px;">Refer out — once, gone</div>
+          </div>
+          <div style="font-size: 2rem; color: var(--mx-text-muted); font-weight: 300;">vs</div>
+          <div style="text-align: center;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; font-weight: 700; color: var(--mx-gold);">~$47,850</div>
+            <div style="font-size: 0.82rem; color: var(--mx-text-muted); margin-top: 6px;">Own the relationship — lifetime</div>
+          </div>
+          <div style="text-align: center; padding: 16px 28px; background: rgba(20,184,166,0.1); border-radius: 14px; border: 2px solid rgba(20,184,166,0.2);">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 3rem; font-weight: 700; color: var(--mx-teal);">32×</div>
+            <div style="font-size: 0.82rem; color: var(--mx-teal); margin-top: 6px; font-weight: 600;">more value per customer</div>
+          </div>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--mx-text-secondary); margin-top: 24px; max-width: 640px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+          You already have customers like this — the ones who come back every few years. Novated leasing just formalises that loyalty into a structured, trackable pipeline with built-in maturity dates that bring them back to your showroom automatically.
+        </p>
+      </div>
+    </div>
+
+    <!-- The Pipeline Dream -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 0; margin-top: 20px;">
+
+      <!-- Pipeline Scenario -->
+      <div class="revenue-card" style="border-radius: 20px 20px 0 0; border-bottom: none;">
+        <span class="label">Scenario — 8 Leases Per Month From Direct Sales</span>
+        <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; margin-top: 8px; margin-bottom: 20px;">How Your Lease Book Compounds</h3>
+
+        <!-- Assumptions -->
+        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; padding: 16px 20px; background: var(--mx-bg-elevated); border-radius: 12px; border: 1px solid var(--mx-border-subtle);">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx-purple);"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">8 direct leases/month</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx-pink);"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">Avg 30 staff per employer</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx-teal);"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">3% annual organic uptake from staff pool</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx-gold);"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">Avg 32-month terms</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: var(--mx-pink);"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">30% repeat employer overlap after Y1</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 8px; height: 8px; border-radius: 2px; background: #22D3EE;"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--mx-text-muted);">80% retention at maturity</span>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div style="position: relative;">
+          <canvas id="compoundChart" style="width: 100%; height: 400px;"></canvas>
+          <!-- Tooltip -->
+          <div id="chartTooltip" style="display: none; position: absolute; background: var(--mx-bg-card); border: 1px solid var(--mx-border); border-radius: 10px; padding: 14px 18px; pointer-events: none; z-index: 10; box-shadow: 0 8px 24px rgba(0,0,0,0.4); min-width: 180px;"></div>
+        </div>
+
+        <!-- Legend -->
+        <div style="display: flex; gap: 20px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 14px; height: 14px; border-radius: 3px; background: #8B5CF6;"></span>
+            <span style="font-size: 0.75rem; color: var(--mx-text-muted);">Direct Sales (8/month)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 14px; height: 14px; border-radius: 3px; background: #2DD4BF;"></span>
+            <span style="font-size: 0.75rem; color: var(--mx-text-muted);">Organic (3% of staff pool)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 14px; height: 14px; border-radius: 3px; background: #FBBF24;"></span>
+            <span style="font-size: 0.75rem; color: var(--mx-text-muted);">Retention (80% at maturity)</span>
+          </div>
+        </div>
+
+        <!-- Summary Stats -->
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px;">
+          <div style="background: var(--mx-bg-elevated); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--mx-border-subtle);">
+            <span id="statY1" style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--mx-purple); display: block;"></span>
+            <span style="font-size: 0.68rem; color: var(--mx-text-muted);">Year 1 Leases</span>
+          </div>
+          <div style="background: var(--mx-bg-elevated); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--mx-border-subtle);">
+            <span id="statY3" style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--mx-pink); display: block;"></span>
+            <span style="font-size: 0.68rem; color: var(--mx-text-muted);">Year 3 Leases</span>
+          </div>
+          <div style="background: var(--mx-bg-elevated); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid var(--mx-border-subtle);">
+            <span id="statY5" style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--mx-teal); display: block;"></span>
+            <span style="font-size: 0.68rem; color: var(--mx-text-muted);">Year 5 Leases</span>
+          </div>
+          <div style="background: linear-gradient(135deg, rgba(251,191,36,0.06), var(--mx-bg-elevated)); border-radius: 12px; padding: 16px; text-align: center; border: 1px solid rgba(251,191,36,0.15);">
+            <span id="statTotal" style="font-family: 'JetBrains Mono', monospace; font-size: 1.3rem; font-weight: 700; color: var(--mx-gold); display: block;"></span>
+            <span style="font-size: 0.68rem; color: var(--mx-text-muted);">5-Year Total</span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.72rem; color: var(--mx-text-muted); margin-top: 16px; text-align: center; font-style: italic;">
+          Hover over the chart to see month-by-month breakdown. After Year 1, ~30% of deals come from colleagues at existing employers, moderating new employer growth. Retention stream begins around month 32.
+        </p>
+      </div>
+
+      <script>
+      (function() {
+        const MONTHS = 60;
+        const DIRECT_PER_MONTH = 8;
+        const STAFF_PER_EMPLOYER = 30;
+        const ANNUAL_UPTAKE = 0.03;
+        const MONTHLY_UPTAKE = ANNUAL_UPTAKE / 12;
+        const LEASE_TERM = 32;
+        const RETENTION_RATE = 0.80;
+        const OVERLAP_RATE = 0.30; // After Y1, 30% of deals are repeat employers
+
+        let data = [];
+        let cumEmployers = 0;
+        let cumStaff = 0;
+
+        for (let m = 1; m <= MONTHS; m++) {
+          let direct = DIRECT_PER_MONTH;
+
+          // After Y1, 30% of deals come from existing employers (overlap)
+          let newEmployersThisMonth;
+          if (m <= 12) {
+            newEmployersThisMonth = direct; // All fresh in Y1
+          } else {
+            newEmployersThisMonth = direct * (1 - OVERLAP_RATE); // 70% are new
+          }
+
+          cumEmployers += newEmployersThisMonth;
+          cumStaff += newEmployersThisMonth * STAFF_PER_EMPLOYER;
+
+          let organic = cumStaff * MONTHLY_UPTAKE;
+          let retention = 0;
+
+          if (m > LEASE_TERM) {
+            let matMonth = m - LEASE_TERM;
+            if (matMonth > 0 && matMonth <= data.length) {
+              let d2 = data[matMonth - 1];
+              let maturing = d2.direct + d2.organic + d2.retention;
+              retention = maturing * RETENTION_RATE;
+            }
+          }
+
+          let total = direct + organic + retention;
+          data.push({ month: m, direct, organic, retention, total, cumEmployers: Math.round(cumEmployers), cumStaff: Math.round(cumStaff), newEmps: Math.round(newEmployersThisMonth) });
+        }
+
+        let y1 = data.slice(0, 12).reduce((s, d) => s + d.total, 0);
+        let y3 = data.slice(24, 36).reduce((s, d) => s + d.total, 0);
+        let y5 = data.slice(48, 60).reduce((s, d) => s + d.total, 0);
+        let totalAll = data.reduce((s, d) => s + d.total, 0);
+
+        document.getElementById('statY1').textContent = Math.round(y1);
+        document.getElementById('statY3').textContent = Math.round(y3);
+        document.getElementById('statY5').textContent = Math.round(y5);
+        document.getElementById('statTotal').textContent = Math.round(totalAll).toLocaleString();
+
+        const canvas = document.getElementById('compoundChart');
+        const dpr = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = 400 * dpr;
+        canvas.style.height = '400px';
+        const ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+
+        const W = rect.width;
+        const H = 400;
+        const padL = 56, padR = 20, padT = 20, padB = 44;
+        const chartW = W - padL - padR;
+        const chartH = H - padT - padB;
+
+        const maxTotal = Math.max(...data.map(d => d.total));
+        const maxRounded = Math.ceil(maxTotal / 10) * 10;
+
+        function xPos(m) { return padL + ((m - 1) / (MONTHS - 1)) * chartW; }
+        function yPos(v) { return padT + chartH - (v / maxRounded) * chartH; }
+
+        // Grid
+        ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+        ctx.lineWidth = 1;
+        for (let i = 0; i <= 5; i++) {
+          let val = (maxRounded / 5) * i;
+          let y = yPos(val);
+          ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(W - padR, y); ctx.stroke();
+          ctx.fillStyle = 'rgba(255,255,255,0.25)';
+          ctx.font = '10px JetBrains Mono, monospace';
+          ctx.textAlign = 'right';
+          ctx.fillText(Math.round(val), padL - 8, y + 3);
+        }
+
+        // Year markers
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.font = '10px JetBrains Mono, monospace';
+        ctx.textAlign = 'center';
+        for (let yr = 1; yr <= 5; yr++) {
+          let m = yr * 12;
+          let x = xPos(m);
+          ctx.setLineDash([4, 4]);
+          ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+          ctx.beginPath(); ctx.moveTo(x, padT); ctx.lineTo(x, padT + chartH); ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.fillText('Y' + yr, x, H - 8);
+        }
+
+        // Retention start marker
+        let retX = xPos(LEASE_TERM);
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = 'rgba(20,184,166,0.3)';
+        ctx.beginPath(); ctx.moveTo(retX, padT); ctx.lineTo(retX, padT + chartH); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(20,184,166,0.5)';
+        ctx.font = '9px JetBrains Mono, monospace';
+        ctx.fillText('retention starts', retX, padT - 6);
+
+        // Overlap marker at Y1
+        let ovX = xPos(12);
+        ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+        ctx.beginPath(); ctx.moveTo(ovX, padT); ctx.lineTo(ovX, padT + chartH); ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.font = '9px JetBrains Mono, monospace';
+        ctx.fillText('30% overlap begins', ovX, padT - 6);
+
+        // Stacking: direct, organic, retention
+        function s1(d) { return d.direct; }
+        function s2(d) { return d.direct + d.organic; }
+        function s3(d) { return d.total; }
+
+        function drawArea(getBottom, getTop, fillColor) {
+          ctx.beginPath();
+          for (let i = 0; i < data.length; i++) {
+            let x = xPos(data[i].month);
+            let y = yPos(getTop(data[i]));
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+          for (let i = data.length - 1; i >= 0; i--) {
+            let x = xPos(data[i].month);
+            let y = yPos(getBottom(data[i]));
+            ctx.lineTo(x, y);
+          }
+          ctx.closePath();
+          ctx.fillStyle = fillColor;
+          ctx.fill();
+        }
+
+        // Colour palette: muted but distinct
+        drawArea(d => 0, s1, 'rgba(139,92,246,0.2)');    // soft purple - direct
+        drawArea(s1, s2, 'rgba(45,212,191,0.18)');         // soft teal - organic
+        drawArea(s2, s3, 'rgba(251,191,36,0.18)');         // soft gold - retention
+
+        function drawLine(getValue, color, width) {
+          ctx.beginPath();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = width;
+          ctx.lineJoin = 'round';
+          for (let i = 0; i < data.length; i++) {
+            let x = xPos(data[i].month);
+            let y = yPos(getValue(data[i]));
+            i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+
+        drawLine(s3, 'rgba(255,255,255,0.6)', 2.5);  // total - white
+        drawLine(s1, '#8B5CF6', 1.5);                   // direct - purple
+        drawLine(s2, '#2DD4BF', 1.5);                   // organic boundary - teal
+
+        // Tooltip
+        const tooltip = document.getElementById('chartTooltip');
+        canvas.addEventListener('mousemove', function(e) {
+          let bounds = canvas.getBoundingClientRect();
+          let mx = e.clientX - bounds.left;
+          let monthIdx = Math.round(((mx - padL) / chartW) * (MONTHS - 1));
+          monthIdx = Math.max(0, Math.min(MONTHS - 1, monthIdx));
+          let d = data[monthIdx];
+          let x = xPos(d.month);
+
+          tooltip.style.display = 'block';
+          tooltip.style.left = (x + 16) + 'px';
+          tooltip.style.top = (yPos(d.total) - 20) + 'px';
+          if (x + 240 > W) tooltip.style.left = (x - 240) + 'px';
+
+          let overlapNote = d.month > 12 ? '<div style="font-size: 0.62rem; color: rgba(255,255,255,0.35); margin-top: 4px;">30% of direct deals are repeat employers</div>' : '';
+
+          tooltip.innerHTML = `
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 600; color: var(--mx-text-primary); margin-bottom: 10px;">Month ${d.month} <span style="color: var(--mx-text-muted);">· Year ${Math.ceil(d.month/12)}</span></div>
+            <div style="display: flex; justify-content: space-between; gap: 24px; font-size: 0.75rem; margin-bottom: 4px;">
+              <span style="color: #8B5CF6;">■ Direct sales</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">${d.direct}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 24px; font-size: 0.75rem; margin-bottom: 4px;">
+              <span style="color: #2DD4BF;">■ Organic uptake</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">${d.organic.toFixed(1)}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 24px; font-size: 0.75rem; margin-bottom: 8px;">
+              <span style="color: #FBBF24;">■ Retention</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-weight: 600;">${d.retention.toFixed(1)}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; gap: 24px; font-size: 0.8rem; padding-top: 6px; border-top: 1px solid var(--mx-border-subtle);">
+              <span style="font-weight: 600; color: var(--mx-text-primary);">Total/month</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2DD4BF;">${d.total.toFixed(1)}</span>
+            </div>
+            <div style="font-size: 0.65rem; color: var(--mx-text-muted); margin-top: 6px;">${d.cumEmployers} employers · ${d.cumStaff.toLocaleString()} staff · ${d.newEmps} new emps/mo</div>
+            ${overlapNote}
+          `;
+        });
+
+        canvas.addEventListener('mouseleave', function() {
+          tooltip.style.display = 'none';
+        });
+      })();
+      </script>
+
+      <!-- What Every Lease Means For Your Dealership -->
+      <div class="revenue-card" style="border-radius: 0 0 20px 20px; border-top: 1px solid var(--mx-border);">
+        <span class="label">What Every Lease in That Pipeline Means for Booran</span>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 20px;">
+
+          <div style="padding: 24px; background: var(--mx-bg-elevated); border-radius: 14px; border: 1px solid var(--mx-border-subtle);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">A Car Sale — On Your Terms</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Every novated lease is a car delivery through your showroom. Your price, your negotiation, your gross margin. No procurement channel dictating where the customer buys.</p>
+            <span class="value-tag" style="margin-top: 12px;">Full Dealer Gross Retained</span>
+          </div>
+
+          <div style="padding: 24px; background: var(--mx-bg-elevated); border-radius: 14px; border: 1px solid var(--mx-border-subtle);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-pink), var(--mx-purple)); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Full Aftermarket Revenue</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Tinting, paint protection, accessories, floor mats, towbars — all packaged into the lease payment at point of sale. Pre-approved budget means higher conversion.</p>
+            <span class="value-tag" style="margin-top: 12px;">100% Dealer Aftermarket</span>
+          </div>
+
+          <div style="padding: 24px; background: var(--mx-bg-elevated); border-radius: 14px; border: 1px solid var(--mx-border-subtle);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-purple-dark), var(--mx-purple)); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Insurance & Warranty</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Comprehensive, gap, and extended warranty stay in your lane. Bundle them into the lease — customer pays via salary packaging, you keep the margin.</p>
+            <span class="value-tag" style="margin-top: 12px;">100% Dealer Insurance Margin</span>
+          </div>
+
+          <div style="padding: 24px; background: linear-gradient(160deg, rgba(20,184,166,0.06), var(--mx-bg-elevated) 60%); border-radius: 14px; border: 1px solid rgba(20,184,166,0.2);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-teal), #0D9488); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Guaranteed Remarketing Pipeline</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Every lease has a maturity date — and our platform tracks every one. When the term is up, the system automatically surfaces the opportunity: trade-in, re-lease, upgrade, or a quality used car for your yard.</p>
+            <span class="value-tag" style="margin-top: 12px;">80% Re-lease / Trade-Up Rate</span>
+          </div>
+
+          <div style="padding: 24px; background: var(--mx-bg-elevated); border-radius: 14px; border: 1px solid var(--mx-border-subtle);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-teal), var(--mx-purple)); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Finance Commission</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Commission earned depends on the model you choose — write the finance yourself for maximum margin, or refer to millarX for a hands-off commission. Either way, you earn.</p>
+            <span class="value-tag" style="margin-top: 12px;">Your Choice, Your Model</span>
+          </div>
+
+          <div style="padding: 24px; background: linear-gradient(160deg, rgba(251,191,36,0.06), var(--mx-bg-elevated) 60%); border-radius: 14px; border: 1px solid rgba(251,191,36,0.15);">
+            <div style="width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, var(--mx-gold), #F59E0B); margin-bottom: 12px;"></div>
+            <h3 style="font-size: 1rem; margin-bottom: 6px;">Employer Network Revenue</h3>
+            <p style="font-size: 0.82rem; color: var(--mx-text-muted); line-height: 1.6;">Every employee you onboard, millarX signs their employer. Future leases through that employer pay Booran a % — regardless of the car, the brand, or where they buy it. Passive, compounding, forever.</p>
+            <span class="value-tag" style="background: rgba(251,191,36,0.12); color: var(--mx-gold); margin-top: 12px;">Passive & Compounding</span>
+            <p style="font-size: 0.65rem; color: var(--mx-text-muted); margin-top: 8px; font-style: italic; opacity: 0.7;">*While the employer remains an active client of millarX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Flywheel -->
+    <div class="revenue-card" style="margin-top: 20px; text-align: center; padding: 48px 40px; background: linear-gradient(160deg, rgba(124,58,237,0.04), var(--mx-bg-card) 30%, rgba(20,184,166,0.04));">
+      <span class="label">Automated Lead Pipeline</span>
+      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.5rem; margin-top: 12px; margin-bottom: 20px;">The Platform Builds a Compounding Lead Engine</h3>
+
+      <!-- Visual flywheel -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; margin: 32px auto; max-width: 900px;">
+        <div style="background: var(--mx-bg-elevated); border: 1px solid var(--mx-border); border-radius: 14px; padding: 20px 18px; text-align: center; min-width: 130px;">
+          <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); margin: 0 auto 6px;"></div>
+          <div style="font-size: 0.78rem; font-weight: 600; color: var(--mx-text-primary);">Deal Entered</div>
+          <div style="font-size: 0.68rem; color: var(--mx-text-muted);">System captures data</div>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--mx-purple); padding: 0 8px; opacity: 0.5;">→</div>
+        <div style="background: var(--mx-bg-elevated); border: 1px solid var(--mx-border); border-radius: 14px; padding: 20px 18px; text-align: center; min-width: 130px;">
+          <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--mx-pink), var(--mx-purple)); margin: 0 auto 6px;"></div>
+          <div style="font-size: 0.78rem; font-weight: 600; color: var(--mx-text-primary);">Employer Mapped</div>
+          <div style="font-size: 0.68rem; color: var(--mx-text-muted);">Pipeline expands</div>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--mx-purple); padding: 0 8px; opacity: 0.5;">→</div>
+        <div style="background: var(--mx-bg-elevated); border: 1px solid var(--mx-border); border-radius: 14px; padding: 20px 18px; text-align: center; min-width: 130px;">
+          <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--mx-teal), var(--mx-purple)); margin: 0 auto 6px;"></div>
+          <div style="font-size: 0.78rem; font-weight: 600; color: var(--mx-text-primary);">Opps Surfaced</div>
+          <div style="font-size: 0.68rem; color: var(--mx-text-muted);">System identifies leads</div>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--mx-purple); padding: 0 8px; opacity: 0.5;">→</div>
+        <div style="background: var(--mx-bg-elevated); border: 1px solid var(--mx-border); border-radius: 14px; padding: 20px 18px; text-align: center; min-width: 130px;">
+          <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--mx-gold), #F59E0B); margin: 0 auto 6px;"></div>
+          <div style="font-size: 0.78rem; font-weight: 600; color: var(--mx-text-primary);">Deals Convert</div>
+          <div style="font-size: 0.68rem; color: var(--mx-text-muted);">Revenue to dealer</div>
+        </div>
+        <div style="font-size: 1.4rem; color: var(--mx-purple); padding: 0 8px; opacity: 0.5;">→</div>
+        <div style="background: linear-gradient(160deg, rgba(20,184,166,0.1), var(--mx-bg-elevated) 60%); border: 1px solid rgba(20,184,166,0.25); border-radius: 14px; padding: 20px 18px; text-align: center; min-width: 130px;">
+          <div style="width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--mx-teal), #0D9488); margin: 0 auto 6px;"></div>
+          <div style="font-size: 0.78rem; font-weight: 600; color: var(--mx-teal);">Maturity Flagged</div>
+          <div style="font-size: 0.68rem; color: var(--mx-text-muted);">Cycle resets</div>
+        </div>
+      </div>
+
+      <div style="max-width: 680px; margin: 0 auto;">
+        <p style="font-size: 0.92rem; color: var(--mx-text-secondary); line-height: 1.7;">
+          The platform does this automatically. Every deal feeds data back into the system, every employer expands the addressable pipeline, and every maturity generates a new lead — pushed directly to your dealership. <strong style="color: var(--mx-teal);">It's a tech-driven lead engine that compounds with every lease you write.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHAT YOU KEEP ===== -->
+<section class="control-section">
+  <div class="section-inner">
+    <span class="label">Your Dealership, Your Margin</span>
+    <h2>Control Your<br><span class="teal-text">Profit Levers.</span></h2>
+
+    <div class="control-grid">
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink));"></div>
+        <h3>Aftermarket & Accessories</h3>
+        <p>Tinting, paint protection, floor mats, towbars — everything stays yours. We don't touch aftermarket revenue. Ever.</p>
+        <span class="value-tag">100% Retained</span>
+      </div>
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-pink), var(--mx-purple));"></div>
+        <h3>Vehicle Gross Margin</h3>
+        <p>Your deal, your gross. We're a leasing overlay, not a procurement channel. Sell the car at your price.</p>
+        <span class="value-tag">100% Retained</span>
+      </div>
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-teal), #0D9488);"></div>
+        <h3>Zero Procurement Fees</h3>
+        <p>No dealer delivery fees, no procurement charges, no hidden admin costs. The customer pays a flat management fee — that's it.</p>
+        <span class="value-tag">$0 to Dealer</span>
+      </div>
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-purple-dark), var(--mx-purple));"></div>
+        <h3>Insurance Revenue</h3>
+        <p>Comprehensive, gap, and warranty insurance stays in your lane. Bundle it in the deal, keep the margin.</p>
+        <span class="value-tag">100% Retained</span>
+      </div>
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-gold), #F59E0B);"></div>
+        <h3>Employer List Ownership</h3>
+        <p>Every employer you introduce stays attributed to Booran. Future deals through that employer? Commission flows back to you.</p>
+        <span class="value-tag">Your Pipeline</span>
+      </div>
+      <div class="control-card">
+        <div class="card-icon" style="background: linear-gradient(135deg, var(--mx-teal), var(--mx-purple));"></div>
+        <h3>Customer Relationship</h3>
+        <p>No fleet company sitting between you and your customer. Servicing, trade-ins, and future purchases stay in your ecosystem.</p>
+        <span class="value-tag">Always Yours</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROJECTIONS ===== -->
+<section class="projections-section">
+  <div class="section-inner">
+    <span class="label">Building the Pipeline</span>
+    <h2>The Goal: A Dealer-Owned<br><span class="gold-text">Novated Lease Pipeline</span></h2>
+
+    <!-- Moved straight to pipeline dream content -->
+
+    <!-- WIN-WIN PARTNERSHIP -->
+    <div class="revenue-card" style="margin-top: 20px; padding: 44px 40px; border-color: rgba(20,184,166,0.2); background: linear-gradient(160deg, rgba(20,184,166,0.03), var(--mx-bg-card) 40%);">
+      <span class="label" style="color: var(--mx-teal);">Transparent Partnership</span>
+      <h3 style="font-family: 'DM Serif Display', serif; font-size: 1.6rem; margin-top: 8px; margin-bottom: 8px;">What's In It for You. What's In It for Us.</h3>
+      <p style="font-size: 0.92rem; color: var(--mx-text-secondary); line-height: 1.7; max-width: 780px; margin-bottom: 36px;">
+        We're not here to clip a ticket and disappear. millarX grows when Booran grows — our incentives are fully aligned. Here's exactly how this works for both of us.
+      </p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+
+        <!-- BOORAN WINS -->
+        <div style="background: var(--mx-bg-elevated); border-radius: 16px; padding: 32px; border: 1px solid var(--mx-border-subtle); position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--mx-purple), var(--mx-pink));"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+            <div style="width: 44px; height: 44px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: white;">B</div>
+            <div>
+              <h3 style="font-size: 1.1rem; margin-bottom: 0;">What Booran Gets</h3>
+              <p style="font-size: 0.72rem; color: var(--mx-text-muted); margin: 0;">Your dealership. Your revenue. Your pipeline.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">✓</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Exclusive VIC dealer partner</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Every employer deal in Victoria that comes through millarX for your franchise brands gets pushed to Booran first. You're not sharing the pipe with other dealers on the brands you represent.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">✓</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Full margin on every car sale</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Gross, aftermarket, insurance, accessories — 100% stays with you. We don't touch your deal.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">✓</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Remarketing pipeline on autopilot</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Our platform tracks every lease maturity automatically — the Australian average is around 32 months. The system flags the opportunity, surfaces the lead, and pushes the customer back to your showroom. No manual tracking, no missed dates. The tech does the work.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">✓</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Zero admin, zero risk</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">No lease management, no compliance overhead, no payroll headaches. We handle it all — you just sell cars and collect revenue.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-teal); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">✓</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Employer network income</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Tiered commission on every deal that flows through employers you introduced — passive income that compounds as the book grows.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MILLARX WINS -->
+        <div style="background: var(--mx-bg-elevated); border-radius: 16px; padding: 32px; border: 1px solid var(--mx-border-subtle); position: relative; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--mx-teal), #0D9488);"></div>
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
+            <span style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; letter-spacing: -0.02em;"><span style="color: var(--mx-text-primary);">millar</span><span style="background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">X</span></span>
+            <div>
+              <h3 style="font-size: 1.1rem; margin-bottom: 0;">What millarX Gets</h3>
+              <p style="font-size: 0.72rem; color: var(--mx-text-muted); margin: 0;">Our book grows. Your pipeline feeds it.</p>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-purple); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">◆</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Lease book growth</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Every deal Booran writes or refers adds to our managed lease book. More leases under management means a stronger, more sustainable business for millarX.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-purple); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">◆</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Employer network expansion</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Every employer Booran introduces expands the millarX employer network. We earn a management fee on each lease — that's our revenue model.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-purple); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">◆</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Dealer-powered distribution</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">Booran's 13+ brands across SE Melbourne give millarX feet on the ground at scale — without needing a sales team. Your showrooms are our shopfront.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <span style="color: var(--mx-purple); font-size: 0.85rem; margin-top: 2px; flex-shrink: 0;">◆</span>
+              <div>
+                <div style="font-size: 0.88rem; font-weight: 600; color: var(--mx-text-primary);">Retention revenue</div>
+                <div style="font-size: 0.78rem; color: var(--mx-text-muted); line-height: 1.5;">When leases mature and customers re-lease, trade up, or refinance — millarX earns again. Just like Booran does. The incentive is identical: keep the customer happy, keep the cycle going.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 20px; padding: 16px; background: rgba(124, 58, 237, 0.06); border-radius: 10px; border: 1px solid rgba(124, 58, 237, 0.1);">
+            <p style="font-size: 0.82rem; color: var(--mx-text-secondary); line-height: 1.6; margin: 0; text-align: center;">
+              <strong style="color: var(--mx-text-primary);">Our revenue model is simple:</strong> a flat monthly management fee per lease, paid by the employee via salary packaging. No hidden margins, no inflated rates, no conflict with your deal.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aligned incentives callout -->
+      <div style="margin-top: 24px; padding: 28px 32px; background: linear-gradient(135deg, rgba(124,58,237,0.06), rgba(20,184,166,0.06)); border: 1px solid var(--mx-border); border-radius: 14px; text-align: center;">
+        <p style="font-size: 1rem; color: var(--mx-text-secondary); line-height: 1.7; max-width: 700px; margin: 0 auto;">
+          <strong style="color: var(--mx-text-primary);">The incentives are fully aligned.</strong> millarX grows when Booran sells more cars and signs more employers. Booran grows when millarX manages more leases and pushes more deals back through your doors. Neither side wins unless both sides win.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WE HANDLE EVERYTHING ===== -->
+<section class="handle-section">
+  <div class="section-inner">
+    <span class="label">Platform-Managed, Dealer-Focused</span>
+    <h2>You Sell Cars.<br><span class="gradient-text">Our Tech Handles the Rest.</span></h2>
+
+    <div class="handle-grid">
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Employer Onboarding</h3>
+          <p>We set up the employer, payroll deductions, and compliance. Fully managed from Day 1.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Contract Management</h3>
+          <p>Lease documentation, budget adjustments, variation forms — all handled in our system.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>FBT Compliance & Reporting</h3>
+          <p>We manage FBT to $0 where possible. Employers download reports from the portal. Rare edge cases only.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Remarketing & End-of-Lease</h3>
+          <p>When leases mature, we handle the remarketing process — creating natural trade-in opportunities back to Booran.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Invoicing & Payroll</h3>
+          <p>We invoice inline with payroll. GST-inclusive, standard processing. Set-and-forget for the employer.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Training & Deal Support</h3>
+          <p>Onsite and online training for your F&I and sales teams. Ongoing support to close deals when needed.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>EV & FBT-Exempt Vehicles</h3>
+          <p>Full support for the growing EV market. FBT-exempt vehicles are a powerful sales lever — we make it easy.</p>
+        </div>
+      </div>
+      <div class="handle-item">
+        <div class="handle-check">✓</div>
+        <div>
+          <h3>Co-Branded Materials</h3>
+          <p>Booran-branded quoting tools, employer guides, and marketing collateral. Your brand, our platform.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="section-inner" style="position: relative; z-index: 2;">
+    <span class="label">Next Steps</span>
+    <h2>Ready to Own Every<br><span class="gradient-text">Novated Dollar?</span></h2>
+    <p class="cta-sub">
+      Join the revolution in dealer-first novated leasing. Let's get Booran Motors set up on MXDealerAdvantage and start building your employer pipeline.
+    </p>
+
+    <!-- Team + CTA in balanced grid -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 40px; max-width: 720px; margin-left: auto; margin-right: auto;">
+
+      <!-- Left: Senior Team -->
+      <div style="background: var(--mx-bg-card); border: 1px solid var(--mx-border); border-radius: 20px; padding: 32px; text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-text-muted); text-transform: uppercase; margin-bottom: 20px;">Senior Team</div>
+        <div style="display: flex; justify-content: center; gap: 24px;">
+          <div style="text-align: center;">
+            <div style="width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); margin: 0 auto 10px;"></div>
+            <span style="font-family: 'DM Serif Display', serif; font-size: 1rem; display: block; color: var(--mx-text-primary);">Ben</span>
+            <span style="font-size: 0.72rem; color: var(--mx-text-muted);">CEO & Founder</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--mx-teal), #0D9488); margin: 0 auto 10px;"></div>
+            <span style="font-family: 'DM Serif Display', serif; font-size: 1rem; display: block; color: var(--mx-text-primary);">Dane</span>
+            <span style="font-size: 0.72rem; color: var(--mx-text-muted);">Technology</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--mx-gold), #F59E0B); margin: 0 auto 10px;"></div>
+            <span style="font-family: 'DM Serif Display', serif; font-size: 1rem; display: block; color: var(--mx-text-primary);">Josh</span>
+            <span style="font-size: 0.72rem; color: var(--mx-text-muted);">Growth</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Contact + CTA Button -->
+      <div style="background: var(--mx-bg-card); border: 1px solid var(--mx-border); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; color: var(--mx-text-muted); text-transform: uppercase; margin-bottom: 16px;">Get in Touch</div>
+        <span style="font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--mx-text-primary); display: block; margin-bottom: 4px;">Ben</span>
+        <span style="font-size: 0.82rem; color: var(--mx-text-muted); display: block; margin-bottom: 16px;">CEO & Founder — millarX</span>
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 20px;">
+          <a href="mailto:ben@millarX.com.au" style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--mx-teal); text-decoration: none;">ben@millarX.com.au</a>
+          <a href="tel:0492886857" style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--mx-teal); text-decoration: none;">0492 886 857</a>
+        </div>
+        <a href="https://www.mxdealeradvantage.com.au" target="_blank" style="display: inline-block; padding: 14px 28px; background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); color: white; font-weight: 600; font-size: 0.92rem; border-radius: 12px; text-decoration: none; transition: all 0.3s ease; box-shadow: 0 4px 16px rgba(124,58,237,0.3);">
+          Visit the Dealer Portal →
+        </a>
+      </div>
+    </div>
+
+    <div class="cta-footer">
+      <span style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; letter-spacing: -0.02em; opacity: 0.6;"><span style="color: var(--mx-text-primary);">millar</span><span style="background: linear-gradient(135deg, var(--mx-purple), var(--mx-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">X</span></span>
+      <p>millarX &bull; Blackrock Leasing Pty Ltd &bull; ACL 560101 &bull; ABN 15 681 267 818</p>
+      <p style="margin-top: 4px;">Confidential — Prepared for Booran Motors, February 2026</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
