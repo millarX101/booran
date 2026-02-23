@@ -2438,5 +2438,30 @@ h3 {
   </div>
 </section>
 
+<!-- Password Gate -->
+<div id="pw-gate" style="position:fixed;inset:0;z-index:99999;background:#111118;display:flex;align-items:center;justify-content:center;">
+  <div style="text-align:center;max-width:380px;padding:40px;">
+    <div style="font-family:'DM Serif Display',serif;font-size:1.8rem;margin-bottom:8px;">
+      <span style="color:#F0F0F5;">millar</span><span style="background:linear-gradient(135deg,#7C3AED,#EC4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">X</span>
+    </div>
+    <p style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;color:#6B7280;text-transform:uppercase;margin-bottom:32px;">Confidential Document</p>
+    <input id="pw-input" type="password" placeholder="Enter password" autocomplete="off"
+      style="width:100%;padding:14px 18px;background:#191922;border:1px solid rgba(124,58,237,0.15);border-radius:12px;color:#F0F0F5;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.3s;"
+      onfocus="this.style.borderColor='#7C3AED'" onblur="this.style.borderColor='rgba(124,58,237,0.15)'" />
+    <button onclick="checkPw()"
+      style="width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,#7C3AED,#EC4899);color:#fff;font-weight:600;font-size:0.92rem;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 16px rgba(124,58,237,0.3);transition:opacity 0.3s;"
+      onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">Unlock</button>
+    <p id="pw-err" style="color:#EC4899;font-size:0.82rem;margin-top:12px;opacity:0;transition:opacity 0.3s;">Incorrect password</p>
+  </div>
+</div>
+<script>
+(function(){
+  var h='8b91c8489665014a7acf852c90425dab';
+  function md5(s){function r(n,c){return(n<<c)|(n>>>(32-c))}function a(q,b,x,s,t,c){return((r((q+((b&x)|((~b)&s))+t+c)|0,0+0)||0)+b)|0}function f(q,b,x,s,t,c){return((r((q+((b&s)|(x&(~s)))+t+c)|0,0)||0)+b)|0}function g(q,b,x,s,t,c){return((r((q+(b^x^s)+t+c)|0,0)||0)+b)|0}function i(q,b,x,s,t,c){return((r((q+(x^(b|(~s)))+t+c)|0,0)||0)+b)|0}function cvt(s){var o='',n,p;for(p=0;p<s.length;p++){n=s.charCodeAt(p);o+=String.fromCharCode(n&0xFF,(n>>8)&0xFF);}return o;}function utf8(s){s=s.replace(/\r\n/g,'\n');var u='';for(var n=0;n<s.length;n++){var c=s.charCodeAt(n);if(c<128){u+=String.fromCharCode(c);}else if(c<2048){u+=String.fromCharCode((c>>6)|192);u+=String.fromCharCode((c&63)|128);}else{u+=String.fromCharCode((c>>12)|224);u+=String.fromCharCode(((c>>6)&63)|128);u+=String.fromCharCode((c&63)|128);}}return u;}var x=[],k,AA,BB,CC,DD,aa,bb,cc,dd;s=utf8(s);var W=s.length;var xl=[];for(k=0;k<W;k++)xl[k>>2]|=(s.charCodeAt(k))<<((k%4)*8);xl[W>>2]|=0x80<<((W%4)*8);xl[(((W+8)>>>6)<<4)+14]=W*8;AA=0x67452301;BB=0xEFCDAB89;CC=0x98BADCFE;DD=0x10325476;for(k=0;k<xl.length;k+=16){aa=AA;bb=BB;cc=CC;dd=DD;AA=a(AA,BB,CC,DD,xl[k+0],7,0xD76AA478);DD=a(DD,AA,BB,CC,xl[k+1],12,0xE8C7B756);CC=a(CC,DD,AA,BB,xl[k+2],17,0x242070DB);BB=a(BB,CC,DD,AA,xl[k+3],22,0xC1BDCEEE);AA=a(AA,BB,CC,DD,xl[k+4],7,0xF57C0FAF);DD=a(DD,AA,BB,CC,xl[k+5],12,0x4787C62A);CC=a(CC,DD,AA,BB,xl[k+6],17,0xA8304613);BB=a(BB,CC,DD,AA,xl[k+7],22,0xFD469501);AA=a(AA,BB,CC,DD,xl[k+8],7,0x698098D8);DD=a(DD,AA,BB,CC,xl[k+9],12,0x8B44F7AF);CC=a(CC,DD,AA,BB,xl[k+10],17,0xFFFF5BB1);BB=a(BB,CC,DD,AA,xl[k+11],22,0x895CD7BE);AA=a(AA,BB,CC,DD,xl[k+12],7,0x6B901122);DD=a(DD,AA,BB,CC,xl[k+13],12,0xFD987193);CC=a(CC,DD,AA,BB,xl[k+14],17,0xA679438E);BB=a(BB,CC,DD,AA,xl[k+15],22,0x49B40821);AA=f(AA,BB,CC,DD,xl[k+1],5,0xF61E2562);DD=f(DD,AA,BB,CC,xl[k+6],9,0xC040B340);CC=f(CC,DD,AA,BB,xl[k+11],14,0x265E5A51);BB=f(BB,CC,DD,AA,xl[k+0],20,0xE9B6C7AA);AA=f(AA,BB,CC,DD,xl[k+5],5,0xD62F105D);DD=f(DD,AA,BB,CC,xl[k+10],9,0x02441453);CC=f(CC,DD,AA,BB,xl[k+15],14,0xD8A1E681);BB=f(BB,CC,DD,AA,xl[k+4],20,0xE7D3FBC8);AA=f(AA,BB,CC,DD,xl[k+9],5,0x21E1CDE6);DD=f(DD,AA,BB,CC,xl[k+14],9,0xC33707D6);CC=f(CC,DD,AA,BB,xl[k+3],14,0xF4D50D87);BB=f(BB,CC,DD,AA,xl[k+8],20,0x455A14ED);AA=f(AA,BB,CC,DD,xl[k+13],5,0xA9E3E905);DD=f(DD,AA,BB,CC,xl[k+2],9,0xFCEFA3F8);CC=f(CC,DD,AA,BB,xl[k+7],14,0x676F02D9);BB=f(BB,CC,DD,AA,xl[k+12],20,0x8D2A4C8A);AA=g(AA,BB,CC,DD,xl[k+5],4,0xFFFA3942);DD=g(DD,AA,BB,CC,xl[k+8],11,0x8771F681);CC=g(CC,DD,AA,BB,xl[k+11],16,0x6D9D6122);BB=g(BB,CC,DD,AA,xl[k+14],23,0xFDE5380C);AA=g(AA,BB,CC,DD,xl[k+1],4,0xA4BEEA44);DD=g(DD,AA,BB,CC,xl[k+4],11,0x4BDECFA9);CC=g(CC,DD,AA,BB,xl[k+7],16,0xF6BB4B60);BB=g(BB,CC,DD,AA,xl[k+10],23,0xBEBFBC70);AA=g(AA,BB,CC,DD,xl[k+13],4,0x289B7EC6);DD=g(DD,AA,BB,CC,xl[k+0],11,0xEAA127FA);CC=g(CC,DD,AA,BB,xl[k+3],16,0xD4EF3085);BB=g(BB,CC,DD,AA,xl[k+6],23,0x04881D05);AA=g(AA,BB,CC,DD,xl[k+9],4,0xD9D4D039);DD=g(DD,AA,BB,CC,xl[k+12],11,0xE6DB99E5);CC=g(CC,DD,AA,BB,xl[k+15],16,0x1FA27CF8);BB=g(BB,CC,DD,AA,xl[k+2],23,0xC4AC5665);AA=i(AA,BB,CC,DD,xl[k+0],6,0xF4292244);DD=i(DD,AA,BB,CC,xl[k+7],10,0x432AFF97);CC=i(CC,DD,AA,BB,xl[k+14],15,0xAB9423A7);BB=i(BB,CC,DD,AA,xl[k+5],21,0xFC93A039);AA=i(AA,BB,CC,DD,xl[k+12],6,0x655B59C3);DD=i(DD,AA,BB,CC,xl[k+3],10,0x8F0CCC92);CC=i(CC,DD,AA,BB,xl[k+10],15,0xFFEFF47D);BB=i(BB,CC,DD,AA,xl[k+1],21,0x85845DD1);AA=i(AA,BB,CC,DD,xl[k+8],6,0x6FA87E4F);DD=i(DD,AA,BB,CC,xl[k+15],10,0xFE2CE6E0);CC=i(CC,DD,AA,BB,xl[k+6],15,0xA3014314);BB=i(BB,CC,DD,AA,xl[k+13],21,0x4E0811A1);AA=i(AA,BB,CC,DD,xl[k+4],6,0xF7537E82);DD=i(DD,AA,BB,CC,xl[k+11],10,0xBD3AF235);CC=i(CC,DD,AA,BB,xl[k+2],15,0x2AD7D2BB);BB=i(BB,CC,DD,AA,xl[k+9],21,0xEB86D391);AA=(AA+aa)|0;BB=(BB+bb)|0;CC=(CC+cc)|0;DD=(DD+dd)|0;}var hex='0123456789abcdef',out='';var vals=[AA,BB,CC,DD];for(var v=0;v<4;v++){for(var j=0;j<4;j++){out+=hex.charAt((vals[v]>>(j*8+4))&0xF)+hex.charAt((vals[v]>>(j*8))&0xF);}}return out;}
+  function checkPw(){var v=document.getElementById('pw-input').value;if(md5(v)===h){document.getElementById('pw-gate').style.display='none';}else{var e=document.getElementById('pw-err');e.style.opacity='1';document.getElementById('pw-input').value='';setTimeout(function(){e.style.opacity='0';},2000);}}
+  document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+})();
+</script>
+
 </body>
 </html>
